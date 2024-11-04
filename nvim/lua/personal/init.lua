@@ -1,3 +1,4 @@
+require("personal.packer")
 require("personal.remap")
 
 vim.cmd('set clipboard+=unnamedplus')
