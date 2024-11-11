@@ -1,0 +1,36 @@
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks:
+  - name: enforce .zshrc file
+    ansible.builtin.file:
+      src: ~/dotfiles/zsh/zshrc
+      dest: ~/.zshrc
+      state: link
+  - name: enforce .config directory
+    ansible.builtin.file:
+      name: ~/.config
+      state: directory
+  - name: enforce configuration links
+    ansible.builtin.file:
+      src: "~/dotfiles/{{ module }}"
+      dest: "~/.config/{{ module }}"
+      state: link
+    loop:
+    - tmux
+    - nvim
+    loop_control:
+      loop_var: module
+  - name: enforce tools dependency
+    ansible.builtin.git:
+      repo: "{{ dependency.repo }}"
+      dest: "{{ dependency.dest }}"
+    loop:
+    - repo: https://github.com/tmux-plugins/tpm
+      dest: ~/.tmux/plugins/tpm
+    - repo: https://github.com/wbthomason/packer.nvim
+      dest: ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+    loop_control:
+      loop_var: dependency
+
+

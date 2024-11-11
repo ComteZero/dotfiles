@@ -1,0 +1,12 @@
+- hosts: localhost
+  connection: local
+  tasks:
+  - name: install pre-reqs package
+    ansible.builtin.apt:
+      name:
+      - zsh
+      - tmux
+      - neovim
+      state: present
+    become: true
+    tags: [ prereqs, install ]
