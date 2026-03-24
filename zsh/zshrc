@@ -102,5 +102,6 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
+export VISUAL="nvim"
+export EDITOR=$EDITOR
 PROMPT="%m ${PROMPT}"
